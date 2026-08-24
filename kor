@@ -1,0 +1,28 @@
+import math
+import streamlit as st 
+
+st.set_page_config(page_title='korlat kalkulator')
+
+def szog(x):
+    return math.radians((x-1)*15)
+
+
+def allas(x):
+    return (x/15)+1
+
+
+eredetibal = int(st.number_input("hányasban volt eredetileg az egyik korlát?"))
+eredetijobb = int(st.number_input("hányasban volt eredetileg a második korlát?"))
+mostbal = int(st.number_input("hányasban van rögzítve most az egyik korlát?"))
+
+ebalterjedelem = (math.sin(szog(eredetibal)))
+ejobbterjedelem = (math.sin(szog(eredetijobb)))
+mostbalterj = (math.sin(szog(mostbal)))
+
+eredetitav = (ebalterjedelem + ejobbterjedelem)
+mosttav = mostbalterj
+mostjobb = (math.degrees((math.asin(abs(eredetitav - mosttav)))))
+
+rakd = allas(abs(mostjobb))
+
+st.write("rakd a mozgatható korlátot: ", round(rakd, 1))
